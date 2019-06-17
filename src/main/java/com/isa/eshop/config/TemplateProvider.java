@@ -7,11 +7,13 @@ import freemarker.template.TemplateExceptionHandler;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+import javax.ejb.Stateless;
 import javax.servlet.ServletContext;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@Stateless
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class TemplateProvider {
 
@@ -21,7 +23,7 @@ public final class TemplateProvider {
     private static final String TEMPLATE_EXT = ".ftlh";
 
     public static Template createTemplate(ServletContext servletContext, String templateName){
-        Configuration configuration = new Configuration(Configuration.VERSION_2_3_27);
+        Configuration configuration = new Configuration(Configuration.VERSION_2_3_28);
 
         configuration.setServletContextForTemplateLoading(servletContext, TEMPLATES_DIRECTORY_PATH);
         configuration.setDefaultEncoding("UTF-8");
