@@ -7,13 +7,12 @@ import freemarker.template.TemplateExceptionHandler;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
-import javax.ejb.Stateless;
+
 import javax.servlet.ServletContext;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@Stateless
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class TemplateProvider {
 
@@ -40,3 +39,5 @@ public final class TemplateProvider {
     }
 
 }
+
+

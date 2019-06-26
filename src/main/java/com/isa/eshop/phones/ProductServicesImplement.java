@@ -2,11 +2,11 @@ package com.isa.eshop.phones;
 
 import com.isa.eshop.repository.PhonesRepository;
 
-import javax.ejb.Stateless;
+import javax.ejb.Singleton;
 import java.util.List;
 import java.util.UUID;
 
-@Stateless
+@Singleton
 public class ProductServicesImplement implements ProductServices {
 
     @Override

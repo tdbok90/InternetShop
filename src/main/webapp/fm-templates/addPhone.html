@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2>Create new Phone</h2>
+<p>Please add new mobile phone:</p>
+
+<form action="/addPhoneServlet" method="POST">
+    Producer:<br>
+    <select name="producer">
+        <option value="Samsung">Samsung</option>
+        <option value="Xiaomi">Xiaomi</option>
+        <option value="Huawei">Huawei</option>
+        <option value="LG">LG</option>
+        <option value="Iphon">Iphon</option>
+    </select>
+    <br>
+    Model:<br>
+    <input type="text" name="model" value="Model">
+    <br>
+    Price:<br>
+    <input type="number" name="price" value="price">
+    <br>
+    Scrren:<br>
+    <input type="number" name="scrren" value="scrren">
+    <br>
+    Status:<br>
+    <select name="status">
+        <option value="ProductStatus.ACTIVE">Active</option>
+        <option value="INACTIVE">Inactive</option>
+    </select>
+    <br>
+    Promoted:<br>
+    <select name="promoted">
+    <option value="true">Yes</option>
+    <option value="false">No</option>
+    </select>
+    <br>
+    <br>
+    <input type="submit" value="Submit">
+</form>
+
+
+</body>
+</html>
