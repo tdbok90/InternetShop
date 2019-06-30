@@ -1,6 +1,7 @@
 package com.isa.eshop.servlets;
 
 import com.isa.eshop.config.TemplateProvider;
+import com.isa.eshop.users.LoggedUserService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -24,6 +25,13 @@ public class AdminServlet extends HttpServlet {
 
     @Inject
     private TemplateProvider templateProvider;
+
+    private final LoggedUserService loggedUserService;
+
+    @Inject
+    public AdminServlet(LoggedUserService loggedUserService) {
+        this.loggedUserService = loggedUserService;
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

@@ -41,6 +41,11 @@
       <artifactId>javaee-api</artifactId>
       <version>8.0</version>
     </dependency>
+    <dependency>
+      <groupId>at.favre.lib</groupId>
+      <artifactId>bcrypt</artifactId>
+      <version>0.8.0</version>
+    </dependency>
   </dependencies>
 
   <build>
