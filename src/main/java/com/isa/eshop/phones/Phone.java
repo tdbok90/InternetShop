@@ -14,9 +14,9 @@ public class Phone {
     private String model;
     private String producer;
     private BigDecimal price;
-    private BigDecimal scrren;
+    private BigDecimal screen;
     private ProductStatus status;
-    private LocalDateTime createData;
+    private LocalDateTime createDate;
     private boolean isPromoted;
 
 
