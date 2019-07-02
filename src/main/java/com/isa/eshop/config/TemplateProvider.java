@@ -38,3 +38,4 @@ public class TemplateProvider {
         return configuration.getTemplate(templateName + TEMPLATE_EXT);
     }
 }
+
