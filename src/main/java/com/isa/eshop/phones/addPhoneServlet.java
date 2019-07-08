@@ -24,9 +24,9 @@ public class addPhoneServlet extends HttpServlet {
 
         final String producer = req.getParameter("producer");
         final String model = req.getParameter("model");
-        final BigDecimal price = new BigDecimal(Integer.parseInt(req.getParameter("price")));
-        final BigDecimal screen = new BigDecimal(Integer.parseInt(req.getParameter("scrren")));
-        //final String status = req.getParameter("status");
+        final BigDecimal price = new BigDecimal(req.getParameter("price"));
+        final BigDecimal screen = new BigDecimal(req.getParameter("scrren"));
+        final ProductStatus status = ProductStatus.valueOf(req.getParameter("status"));
         final Boolean promoted = Boolean.valueOf(req.getParameter("promoted"));
         LocalDateTime dateTime = LocalDateTime.now();
 
@@ -35,7 +35,7 @@ public class addPhoneServlet extends HttpServlet {
                 .model(model)
                 .price(price)
                 .scrren(screen)
-                .status(ProductStatus.ACTIVE)
+                .status(status)
                 .isPromoted(promoted)
                 .createData(dateTime)
                 .id(id).build();
