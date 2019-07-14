@@ -1,10 +1,10 @@
-package com.isa.eshop.phones;
+package com.isa.eshop.servlets;
 
 import com.isa.eshop.config.TemplateProvider;
+import com.isa.eshop.users.LoggedUserService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
-import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,27 +16,28 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-@WebServlet("/showAllPhonsServlet")
-public class ShowAllPhonsServlet extends HttpServlet {
+@WebServlet("/login")
+public class LoginServlet extends HttpServlet {
 
     Logger logger = Logger.getLogger(getClass().getName());
 
-    private static final String TEMPLATE_NAME = "products-management";
+    private static final String TEMPLATE_NAME = "index";
+
+    private final LoggedUserService loggedUserService;
+
+    @Inject
+    public LoginServlet(LoggedUserService loggedUserService) {
+        this.loggedUserService = loggedUserService;
+    }
 
     @Inject
     private TemplateProvider templateProvider;
-    @EJB
-    ProductServices productServices;
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.addHeader("Content-Type", "text/html; charset=utf-8");
 
         Map<String, Object> model = new HashMap<>();
-        model.put("products", productServices.getPhoneList());
+        model.put("content", "login");
 
         Template template = templateProvider.getTemplate(
                 getServletContext(), TEMPLATE_NAME
@@ -47,7 +48,17 @@ public class ShowAllPhonsServlet extends HttpServlet {
         } catch (TemplateException e) {
             System.err.println("Error while processing template: " + e);
         }
+    }
 
-
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        final String email = req.getParameter("email");
+        final String password = req.getParameter("password");
+        final boolean isLoginSuccessful = loggedUserService.logUser(email, password);
+        if (isLoginSuccessful) {
+            resp.sendRedirect("/admin");
+        } else {
+            resp.sendRedirect("/login");
+        }
     }
 }

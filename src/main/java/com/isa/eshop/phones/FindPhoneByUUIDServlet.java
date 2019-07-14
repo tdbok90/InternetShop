@@ -14,39 +14,51 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
+import java.util.UUID;
 
-@WebServlet("/showAllPhonsServlet")
-public class ShowAllPhonsServlet extends HttpServlet {
+@WebServlet("/findPhoneByUUIDServlet")
+public class FindPhoneByUUIDServlet extends HttpServlet {
 
-    Logger logger = Logger.getLogger(getClass().getName());
+    private static final String TEMPLATE_NAME = "findByUUID";
 
-    private static final String TEMPLATE_NAME = "products-management";
-
-    @Inject
-    private TemplateProvider templateProvider;
     @EJB
     ProductServices productServices;
+    @Inject
+    TemplateProvider templateProvider;
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.addHeader("Content-Type", "text/html; charset=utf-8");
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+
+        if (req.getParameter("id") == null || req.getParameter("id").isEmpty()) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
+
+        UUID id = UUID.fromString(req.getParameter("id"));
+
+        Phone phone = productServices.getPhoneByUUID(id);
+
+        resp.addHeader("Content-Type", "text/html; charset=utf-8");
 
         Map<String, Object> model = new HashMap<>();
-        model.put("products", productServices.getPhoneList());
+        model.put("mobile", phone);
 
         Template template = templateProvider.getTemplate(
                 getServletContext(), TEMPLATE_NAME
         );
 
         try {
-            template.process(model, response.getWriter());
+            template.process(model, resp.getWriter());
         } catch (TemplateException e) {
             System.err.println("Error while processing template: " + e);
         }
+
+        resp.setStatus(HttpServletResponse.SC_FOUND);
 
 
     }

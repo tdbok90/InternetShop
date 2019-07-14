@@ -28,7 +28,8 @@ public class PhonesRepository {
                 .scrren(BigDecimal.valueOf(5.9))
                 .createData(LocalDateTime.now())
                 .status(ProductStatus.ACTIVE)
-                .isPromoted(false).build();
+                .isPromoted(false)
+                .build();
         phoneRepository.add(phone4);
         Phone phone5 = Phone.builder().
                 id(UUID.randomUUID())
@@ -37,6 +38,7 @@ public class PhonesRepository {
                 .price(BigDecimal.valueOf(489))
                 .scrren(BigDecimal.valueOf(6.3))
                 .createData(LocalDateTime.now())
+                .status(ProductStatus.INACTIVE)
                 .isPromoted(true).build();
         phoneRepository.add(phone5);
         Phone phone6 = Phone.builder()
@@ -46,6 +48,7 @@ public class PhonesRepository {
                 .price(BigDecimal.valueOf(2439))
                 .scrren(BigDecimal.valueOf(6.1))
                 .createData(LocalDateTime.now())
+                .status(ProductStatus.INACTIVE)
                 .isPromoted(true).build();
         phoneRepository.add(phone6);
         Phone phone1 = new Phone();
@@ -55,6 +58,7 @@ public class PhonesRepository {
         phone1.setPrice(BigDecimal.valueOf(589));
         phone1.setScrren(BigDecimal.valueOf(6.26));
         phone1.setCreateData(LocalDateTime.now());
+        phone1.setStatus(ProductStatus.ACTIVE);
         phone1.setPromoted(true);
         phoneRepository.add(phone1);
         Phone phone2 = new Phone();
@@ -64,6 +68,7 @@ public class PhonesRepository {
         phone2.setPrice(BigDecimal.valueOf(299));
         phone2.setScrren(BigDecimal.valueOf(6.26));
         phone2.setCreateData(LocalDateTime.now());
+        phone2.setStatus(ProductStatus.ACTIVE);
         phone2.setPromoted(false);
         phoneRepository.add(phone2);
         Phone phone3 = new Phone();
@@ -73,6 +78,7 @@ public class PhonesRepository {
         phone3.setPrice(BigDecimal.valueOf(2799));
         phone3.setScrren(BigDecimal.valueOf(4.7));
         phone3.setCreateData(LocalDateTime.now());
+        phone3.setStatus(ProductStatus.ACTIVE);
         phone3.setPromoted(true);
         phoneRepository.add(phone3);
     }

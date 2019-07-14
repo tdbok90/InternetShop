@@ -1,10 +1,10 @@
-package com.isa.eshop.phones;
+package com.isa.eshop.servlets;
 
 import com.isa.eshop.config.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
-import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,33 +13,25 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
 import java.util.logging.Logger;
 
-@WebServlet("/PhoneByUUIDServlet")
-public class PhoneByUUIDServlet extends HttpServlet {
-
-    @EJB
-    ProductServices productServices;
+@WebServlet("/page1")
+public class Page1Servlet extends HttpServlet {
 
     Logger logger = Logger.getLogger(getClass().getName());
 
-    private static final String TEMPLATE_NAME = "products-management";
+    private static final String TEMPLATE_NAME = "index";
 
-
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
+    @Inject
+    private TemplateProvider templateProvider;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.addHeader("Content-Type", "text/html; charset=utf-8");
-        Phone phone = productServices.getPhoneByUUID(productServices.getPhoneList().get(1).getId());
 
         Map<String, Object> model = new HashMap<>();
-        model.put("mobile",phone);
+        model.put("content", "page1");
 
-        Template template = TemplateProvider.createTemplate(
+        Template template = templateProvider.getTemplate(
                 getServletContext(), TEMPLATE_NAME
         );
 
@@ -48,7 +40,5 @@ public class PhoneByUUIDServlet extends HttpServlet {
         } catch (TemplateException e) {
             System.err.println("Error while processing template: " + e);
         }
-
-
     }
 }
